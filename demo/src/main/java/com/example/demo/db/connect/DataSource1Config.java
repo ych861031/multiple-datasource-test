@@ -3,7 +3,6 @@ package com.example.demo.db.connect;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -16,8 +15,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
@@ -43,22 +40,8 @@ public class DataSource1Config {
         em.setPackagesToScan("com.example.demo.model.db1");
         em.setJpaVendorAdapter(jpaVendorAdapter);
         em.setPersistenceUnitName("dataSource1PersistenceUnit");
-//        em.setJpaProperties;
 
-//        return builder
-//                .dataSource(dataSource1())
-//                .packages("com.example.demo.model.db1") // Entity1的包路徑
-//                .persistenceUnit("dataSource1PersistenceUnit")
-//                .properties(hibernateProperties())
-//                .build();
         return em;
-    }
-
-    private Map<String, Object> hibernateProperties() {
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        // 加入其他需要的Hibernate配置，如hibernate.show_sql等
-        return properties;
     }
 
     @Bean(name = "transactionManager1")
